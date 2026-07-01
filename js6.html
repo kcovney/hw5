@@ -8,27 +8,28 @@
         <script>
             // gets the user's name and a greeting and renders it on the screen
             function speak(greeting) {
-                const result = document.getElementById('result')
+                const result = document.getElementById('result');
                 const name = document.getElementById('input').value;
                 result.innerHTML = "<br>" + greeting + " " + name;
             }
 
             // give the user a place to type their name
             const nameInput = document.createElement('input');
-            nameInput.id = 'input'
+            nameInput.id = 'input';
             nameInput.placeholder = 'Enter your name';
 
             // make a wrapper for the input and buttons
             const form = document.createElement('form');
-            form.appendChild(nameInput)
+            form.appendChild(nameInput);
 
             // give the user buttons to click that customize their greeting
             const labels = ["Hello", "Good Bye", "Greetings"];
+            const buttons = [];
             labels.forEach(label => {
                 const input = document.createElement('input');
                 input.type = "button";
                 input.value = label;
-                input.addEventListener("click", () => speak(label));
+                buttons.push({ element: input, label: label });
                 form.appendChild(input);
             });
             document.body.appendChild(form);
@@ -37,6 +38,13 @@
             const result = document.createElement('div');
             result.id = 'result';
             document.body.appendChild(result);
+
+            // assign the event handlers once the page has fully loaded
+            window.onload = function() {
+                buttons.forEach(({ element, label }) => {
+                    element.addEventListener("click", () => speak(label));
+                });
+            };
         </script>
     </body>
 </html>
