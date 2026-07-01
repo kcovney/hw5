@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Problem 5</title>
+</head>
+
+<body>
+    <script>
+        function listItems(stringList) {
+            const htmlList = stringList.split(",").map(item => "<li>" + item + "</li>").join(" ");
+            document.body.innerHTML = "<ol>" + htmlList + "</ol>";
+        }
+
+        function testListItems() {
+            const names = "Frodo, Samwise, Merry, Pippin, Aragorn, Boromir, Gandalf, Legolas, Gimli";
+            listItems(names);
+        }
+
+        testListItems();
+    </script>
+</body>
+
+</html>

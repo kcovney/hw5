@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Problem 7</title>
+    </head>
+    <body>
+        <script>
+            // called when the user clicks the Add State button, adds the selected state tot he screen
+            function add_state() {
+                // add the user-selected state to the list
+                const selected_state = selector.value;
+                const span = document.createElement('span');
+                span.textContent = selected_state.split('. ')[1] + " ";
+                document.getElementById('selected_states').appendChild(span);
+
+                // remove user-selected state from the selector
+                const state_selector = document.getElementById('state_selector');
+                let removed = false;
+                [...state_selector.children].forEach((list_state, index) => {
+                    if (removed) {
+                        const state_to_keep = list_state.value.split('. ')[1];
+                        list_state.textContent = "";
+                        list_state.textContent = index + ". " + state_to_keep;
+                    }
+                    if (list_state.value === selected_state) {
+                        list_state.remove()
+                        removed = true;
+                    }
+                });
+            }
+
+            // called when the user clicks the Clear States button, removes all added states previously added
+            function clear_states() {
+                clear_state_list();
+                clear_state_selector();
+                populate_state_selector();
+            }
+            
+            // removes the list of states the user added to the bordered area
+            function clear_state_list() {
+                const container = document.getElementById('selected_states');
+                // remove everything except the clear button
+                [...container.children].forEach(child => {
+                    if (child.id !== 'clear_states_button') {
+                        child.remove();
+                    }
+                });
+            }
+
+            // clears the state selector so it can be repopulated
+            function clear_state_selector() {
+                const state_selector = document.getElementById('state_selector');
+                [...state_selector.children].forEach((list_state, index) => {
+                    list_state.remove()
+                });
+            }
+
+            // adds states from array to selector
+            function populate_state_selector() {
+                // add states to selector
+                states.forEach((state, index) => {
+                    const option = document.createElement('option');
+                    option.textContent = index + 1 + ". " + state;
+                    selector.appendChild(option);
+                });
+                selector.selectedIndex = 0;  // first state is the default
+            }
+
+            // initial list of states
+            const states = ["Alabama", "Alaska", "Arizona", 
+                            "Arkansas", "California", "Colorado", 
+                            "Connecticut", "Delaware", "Florida", 
+                            "Georgia", "Hawaii", "Idaho", 
+                            "Illinois", "Indiana", "Iowa"];
+            const selector = document.createElement('select');
+            const display_size = 10; // number of states to display at a time
+            selector.size = display_size;
+            selector.id = "state_selector";
+            
+            populate_state_selector()
+
+            // add button to add states
+            const add_state_button = document.createElement('button');
+            add_state_button.textContent = "Add State";
+            add_state_button.id = "add_state_button";
+            add_state_button.addEventListener('click', () => add_state());
+
+            // container for the clear state button and added states
+            const div = document.createElement('div');
+            div.id = "selected_states";
+            div.style.border = "1px solid black";
+
+            // button that removes states from the container
+            const clear_states_button = document.createElement('button');
+            clear_states_button.textContent = "Clear States";
+            clear_states_button.id = "clear_states_button";
+            clear_states_button.addEventListener('click', () => clear_states());
+            div.appendChild(clear_states_button);
+
+            document.body.appendChild(selector);
+            document.body.appendChild(add_state_button);
+            document.body.appendChild(div);
+        </script>
+    </body>
+</html>

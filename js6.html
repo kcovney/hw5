@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Problem 6</title>
+    </head>
+    <body>
+        <script>
+            // gets the user's name and a greeting and renders it on the screen
+            function speak(greeting) {
+                const result = document.getElementById('result')
+                const name = document.getElementById('input').value;
+                result.innerHTML = "<br>" + greeting + " " + name;
+            }
+
+            // give the user a place to type their name
+            const nameInput = document.createElement('input');
+            nameInput.id = 'input'
+            nameInput.placeholder = 'Enter your name';
+
+            // make a wrapper for the input and buttons
+            const form = document.createElement('form');
+            form.appendChild(nameInput)
+
+            // give the user buttons to click that customize their greeting
+            const labels = ["Hello", "Good Bye", "Greetings"];
+            labels.forEach(label => {
+                const input = document.createElement('input');
+                input.type = "button";
+                input.value = label;
+                input.addEventListener("click", () => speak(label));
+                form.appendChild(input);
+            });
+            document.body.appendChild(form);
+
+            // make the greeting show up on the screen
+            const result = document.createElement('div');
+            result.id = 'result';
+            document.body.appendChild(result);
+        </script>
+    </body>
+</html>

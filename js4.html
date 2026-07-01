@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Problem 4</title>
+</head>
+
+<body>
+    <div id="result"><div>
+    <script>
+        function count(arr, val) {
+            return arr.filter(n => n < val).length;
+        }
+
+        function testCount() {
+            arr = [1, 2, 3, 4, 5];
+            const result = document.getElementById("result");
+            result.textContent = count(arr, 6);
+            document.body.appendChild(result);
+        }
+
+        testCount();
+    </script>
+</body>
+
+</html>

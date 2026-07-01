@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Problem 3</title>
+</head>
+
+<body>
+    <script>
+        let num1, num2;
+        while (true) {
+            num1 = prompt("enter a number");
+            num2 = prompt("enter another number");
+            if (Number.isInteger(Number(num1)) && Number.isInteger(Number(num2))) {
+                num1 = Number(num1);
+                num2 = Number(num2);
+                break;
+            }
+            alert("please enter a valid number");
+        }
+        let sum = 0
+        const odds = document.createElement("p");
+        for (let i = num1; i <= num2; i++) {
+            if (i % 2) {
+                odds.textContent += i + " ";
+            }
+            sum += i;
+        }
+        const result = document.createElement("p");
+        result.textContent = sum;
+        document.body.appendChild(odds);
+        document.body.appendChild(result);
+    </script>
+</body>
+
+</html>
